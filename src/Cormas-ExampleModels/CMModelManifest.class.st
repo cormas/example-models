@@ -132,6 +132,23 @@ CMModelManifest class >> sshUrl [
 			<< '.git' ]
 ]
 
+{ #category : 'updating' }
+CMModelManifest class >> update [
+
+	| repo branch remote |
+	repo := self iceRepository.
+	branch := repo branch.
+	
+	remote := repo remotes
+		detect: [ :each | each url = self sshUrl ]
+		ifNone: [ repo remotes
+			detect: [ :each | each url = self httpsUrl ]
+			ifNone: [ self error: 'Could not find the remote' ] ].
+		
+	branch pullFrom: remote.
+	self inform: 'Model updated'
+]
+
 { #category : 'see class side' }
 CMModelManifest >> seeClassSide [ 
 ]
