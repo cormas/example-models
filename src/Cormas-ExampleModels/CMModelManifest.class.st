@@ -37,9 +37,7 @@ CMModelManifest class >> githubLink [
 			<< 'github://'
 			<< self githubOrganizationName
 			<< '/'
-			<< self githubRepositoryName
-			<< ':'
-			<< self modelVersion ]
+			<< self githubRepositoryName ]
 ]
 
 { #category : 'constants' }
@@ -96,10 +94,24 @@ CMModelManifest class >> isLoaded [
 
 { #category : 'repository - loading' }
 CMModelManifest class >> load [
-	"Clone repository and install model into the image"
+	"Load the main branch of the model. This should be the stable version compatible with the latest stable version of Cormas"
+	self loadVersion: 'main'
+]
+
+{ #category : 'repository - loading' }
+CMModelManifest class >> loadDev [
+	"Load the dev branch of the model. It should be compatible with the dev branch of Cormas"
+	self loadVersion: 'dev'
+]
+
+{ #category : 'as yet unclassified' }
+CMModelManifest class >> loadVersion: aVersionName [
+	"Clone repository and install model into the image.
+	The version can be 'main', 'dev', 'v1.0', commit SHA, etc."
+	
 	Metacello new
 		baseline: self baselineName;
-		repository: self githubLink;
+		repository: (self githubLink, ':', aVersionName);
 		load
 ]
 
@@ -107,13 +119,6 @@ CMModelManifest class >> load [
 CMModelManifest class >> modelName [
 
 	self subclassResponsibility
-]
-
-{ #category : 'as yet unclassified' }
-CMModelManifest class >> modelVersion [
-
-	"^ 'dev'"
-	^ 'main'
 ]
 
 { #category : 'accessing' }
