@@ -38,7 +38,8 @@ CMModelManifest class >> githubLink [
 			<< self githubOrganizationName
 			<< '/'
 			<< self githubRepositoryName
-			<< ':main' ]
+			<< ':'
+			<< self modelVersion ]
 ]
 
 { #category : 'constants' }
@@ -106,6 +107,13 @@ CMModelManifest class >> load [
 CMModelManifest class >> modelName [
 
 	self subclassResponsibility
+]
+
+{ #category : 'as yet unclassified' }
+CMModelManifest class >> modelVersion [
+
+	"^ 'dev'"
+	^ 'main'
 ]
 
 { #category : 'accessing' }
