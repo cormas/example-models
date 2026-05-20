@@ -8,7 +8,7 @@ Class {
 { #category : 'parameters' }
 DiffuseModelManifest class >> aboutThisModel [
 
-	^ 'This is a simple model where ants move and deposit hormones. For more information, visit [our website](https://cormas.org).
+	^ 'This is a simple model where ants move and deposit hormones. For more information, visit [our website](https://cormas.org/models/diffuse).
 
 ## Agents
 
